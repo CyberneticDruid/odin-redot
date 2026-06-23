@@ -812,6 +812,19 @@ GodotVersion2 :: struct {
     version_string: cstring,    // (e.g. "Godot v3.1.4.stable.official.mono")
 }
 
+RedotVersion :: struct {
+    major:          u32,
+    minor:          u32,
+    patch:          u32,
+    hex:            u32,        ///< Full version encoded as hexadecimal with one byte (2 hex digits) per number (e.g. for "3.1.12" it would be 0x03010C)
+    status:         cstring,    ///< (e.g. "stable", "beta", "rc")
+    status_version: u32,
+    build:          cstring,    ///< (e.g. "custom_build")
+    hash:           cstring,    ///< Full Git commit hash.
+    timestamp:      u64,        ///< Git commit date UNIX timestamp in seconds, or 0 if unavailable.
+    string:         cstring,    ///< (e.g. "Redot v3.1.4.stable.official.mono")
+}
+
 InitializationLevel :: enum c.int {
     Core,
     Servers,
@@ -855,6 +868,15 @@ ExtensionMainLoopCallbacks :: struct {
  */
 GetGodotVersion2 :: #type proc "c" (godot_version: ^GodotVersion2)
 
+/**
+ * @name get_redot_version
+ * @since 4.3
+ *
+ * Gets the Redot version that the GDExtension was loaded into.
+ *
+ * @param r_redot_version A pointer to the structure to write the version information into.
+ */
+GetRedotVersion :: #type proc "c" (redot_version: ^RedotVersion)
 
 /*
     Copyright 2025 Dresses Digital
