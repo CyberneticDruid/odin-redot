@@ -1,5 +1,5 @@
 #pragma once
-#include "../../../godot-cpp/gdextension/gdextension_interface.h"
+#include "../../../extension_api/gdextension_interface.h"
 
 typedef uint8_t NodePath[8];
 typedef uint8_t StringName[8];
