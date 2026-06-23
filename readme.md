@@ -1,13 +1,13 @@
-# Godot Toolkit for Odin
+# Redot Toolkit for Odin
 
 > [!WARNING]
 > **This toolkit is a Work In Progress!**
 >
 > If you are using parts of it, beware of sudden major changes to the API, structure, and features.
 
-This currently targets Godot v4.4. The base interface is backwards compatible with v4.3 and v4.2, and may even work with v4.1, **but it will not work with v4.0**. For a version which works with `v4.0` use the [dev-4.0-2024-02 release](https://github.com/dresswithpockets/odin-godot/tree/dev-4.0-2024-02).
+This currently targets Redot 26.2 (Godot v4.5). Works with Redot LTS 26.1, likely to work with Redot 4.4, maybe a few older versions.
 
-Checkout releases for each Godot version here: https://github.com/dresswithpockets/odin-godot/releases - Some are more stable than others.
+If you're waiting for Godot: https://github.com/dresswithpockets/odin-godot/
 
 ## Base GDExtension Bindings
 
@@ -17,7 +17,7 @@ The bindings to the C Interface are in `gdextension`. Check out [hello-gdextensi
 
 Clone & generate bindings
 ```sh
-git clone --recurse-submodules -j8 https://github.com/dresswithpockets/odin-godot
+git clone --recurse-submodules -j8 https://github.com/CyberneticDruid/odin-redot
 cd odin-godot
 make bindings
 ```
@@ -44,15 +44,24 @@ odin build temple/cli/ -o:speed -out:bin/temple_cli.exe
 odin build bindgen/ -o:speed -out:bin/bindgen.exe
 
 # bindgen requires a path to a json file which describes the GDExtension API.
-# One is available in godot-cpp.
 ./bin/bindgen.exe godot-cpp/gdextension/extension_api.json
 ```
+
+## Bring your own GDExtension API and interface
+run the Redot executable with these flags:
+* --dump-gdextension-interface
+* --dump-extension-api
+* --dump-extension-api-with-docs
+
+note that --dump-extension-api and --dump-extension-api-with-docs (adds a bunch of description fields) each produce a different file named extension_api.json
 
 ## Creating a GDExtension
 
 See [the example game](examples/game) for a working usage of these bindings.
 
 Then, follow the instructions for [using the extension module](https://docs.godotengine.org/en/stable/tutorials/scripting/gdextension/gdextension_cpp_example.html#using-the-gdextension-module).
+
+I found the [C example](https://docs.redotengine.org/tutorials/scripting/gdextension/gdextension_c_example) may also be useful.
 
 ## Godin
 
