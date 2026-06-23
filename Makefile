@@ -19,7 +19,7 @@ debug_bindgen_out := $(OUT_DIR)/bindgen_debug$(exe_suffix)
 temple_dir := temple
 temple_deps := $(wildcard templates/*.temple.twig) $(bindgen_dir)temple.odin
 
-gdextension_api := ./godot-cpp/gdextension/extension_api.json
+gdextension_api := extension_api/extension_api.json
 
 bindings: godot/godot.gen.odin
 
