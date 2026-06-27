@@ -16,7 +16,8 @@ import "views"
 UNIX_ALLOW_READ_WRITE_ALL :: 0o666
 
 open_write_template :: proc(file_path: string, view: $T, template: temple.Compiled(T)) {
-    fhandle, ferr := os.open(file_path)
+    flags := os.File_Flags{os.File_Flag.Create, os.File_Flag.Read, os.File_Flag.Write}
+    fhandle, ferr := os.open(file_path, flags)
     if ferr != 0 {
         fmt.eprintfln("Error opening %v", file_path)
         return
