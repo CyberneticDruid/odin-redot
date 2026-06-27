@@ -16,7 +16,7 @@ import "views"
 UNIX_ALLOW_READ_WRITE_ALL :: 0o666
 
 open_write_template :: proc(file_path: string, view: $T, template: temple.Compiled(T)) {
-    fhandle, ferr := os.open(file_path, os.O_CREATE | os.O_TRUNC | os.O_RDWR, UNIX_ALLOW_READ_WRITE_ALL)
+    fhandle, ferr := os.open(file_path)
     if ferr != 0 {
         fmt.eprintfln("Error opening %v", file_path)
         return
@@ -26,7 +26,7 @@ open_write_template :: proc(file_path: string, view: $T, template: temple.Compil
         os.close(fhandle)
     }
 
-    fstream := os.stream_from_handle(fhandle)
+    fstream := os.to_stream(fhandle)
     flusher, flusher_ok := io.to_flusher(fstream)
     defer if flusher_ok {
         io.flush(flusher)

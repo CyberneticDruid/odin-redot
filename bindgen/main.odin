@@ -73,7 +73,10 @@ parse_args :: proc(options: ^Options) -> (ok: bool) {
 }
 
 load_api :: proc(options: Options) -> (api: ^g.Api, ok: bool) {
-    data := os.read_entire_file(options.api_file) or_return
+    data, iok := os.read_entire_file(options.api_file, context.allocator)
+    if iok != os.ERROR_NONE {
+        fmt.eprintln(iok, "unable to read api file: ", options.api_file)
+    }
     defer delete(data)
 
     api = new(g.Api)
